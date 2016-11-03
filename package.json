@@ -1,0 +1,22 @@
+{
+  "name": "formula",
+  "version": "0.1.0",
+  "description": "stock formula",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/ava --require babel-register  test/*",
+    "build": "./node_modules/babel-cli/bin/babel.js src --out-dir lib",
+    "build:watch": "./node_modules/babel-cli/bin/babel.js src --out-dir lib --watch"
+  },
+  "author": "Yulong Ruan<ruanyu1@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "ramda": "^0.22.1"
+  },
+  "devDependencies": {
+    "ava": "^0.16.0",
+    "babel-cli": "^6.16.0",
+    "babel-core": "^6.17.0",
+    "babel-preset-es2015": "^6.16.0"
+  }
+}
