@@ -1,17 +1,14 @@
-import { last } from 'ramda'
-import { preSum } from './arrayMath'
+import { last, compose, partial } from 'ramda'
+import { average } from './arrayMath'
 
-export const sma = (n = 5, f) => (data = []) => {
-  const finalData = f === undefined ? data : data.map(f)
-  return finalData.reduce((pv, cv, idx) => (idx < n - 1 ? pv.concat([null]) : pv.concat([preSum(n, idx, finalData) / n])), [])
-}
+export const mapF = (data = [], f) => (f === undefined ? data : data.map(f))
 
 const emaFormula = (n, today, yesterday) => {
   const k = 2 / (n + 1)
   return (k * today) + (yesterday * (1 - k))
 }
+const _sma = (n, data) => data.reduce((pv, cv, idx) => (idx < n - 1 ? pv.concat([null]) : pv.concat([average(n, idx, data)])), [])
+const _ema = (n, data) => data.reduce((pv, cv) => (last(pv) === undefined ? pv.concat(cv) : pv.concat(emaFormula(n, cv, last(pv)))), [])
 
-export const ema = (n = 5, f) => (data = []) => {
-  const finalData = f === undefined ? data : data.map(f)
-  return finalData.reduce((pv, cv) => (last(pv) === undefined ? pv.concat(cv) : pv.concat(emaFormula(n, cv, last(pv)))), [])
-}
+export const sma = (n = 5) => compose(partial(_sma, [n]), mapF)
+export const ema = (n = 5) => compose(partial(_ema, [n]), mapF)

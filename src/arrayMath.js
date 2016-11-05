@@ -1,16 +1,27 @@
-import { sum } from 'ramda'
+import { sum as _sum, mean, compose, curry } from 'ramda'
 
 /**
  * arr: [1, 2, 3, 4, 5, 6]
  * n = 3
  * idx = 4
- * return: sum of 3 numbers before value of idx = 4, include value of idx 4
- * in this case, it would be 12
+ * return: [3, 4, 5]
  *
- * @returns {Number}
+ * @returns {Array}
  */
-export const preSum = (n = 1, idx = 0, arr = []) => {
+export const subArray = (n = 1, idx = 0, arr = []) => {
   const end = idx + 1
   const start = end - n < 0 ? 0 : end - n
-  return sum(arr.slice(start, end))
+  return arr.slice(start, end)
 }
+
+export const max = arr => Math.max(...arr)
+
+export const min = arr => Math.min(...arr)
+
+export const sum = curry(compose(_sum, subArray))
+
+export const average = curry(compose(mean, subArray))
+
+export const low = curry(compose(min, subArray))
+
+export const high = curry(compose(max, subArray))
