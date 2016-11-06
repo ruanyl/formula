@@ -1,5 +1,6 @@
 import { last, compose, partial, partialRight, curry, nth } from 'ramda'
 import { average, low, high } from './arrayMath'
+import { mapCompose } from './functional'
 
 export const mapF = (data = [], f) => (f === undefined ? data : data.map(f))
 
@@ -44,3 +45,5 @@ export const k = n => rsvN => compose(partial(_sma, [n]), rsvN)
 export const d = n => kN => _sma(n, kN)
 
 export const j = (kN, dN) => kN.map((kv, idx) => (3 * kv) - (2 * nth(idx, dN)))
+
+export const kdj = (rPeriods, kPeriods, dPeriods) => (closeF, llvF, hhvF) => mapCompose([k(kPeriods)(_rsv(rPeriods, closeF, llvF, hhvF)), d(dPeriods), j])
