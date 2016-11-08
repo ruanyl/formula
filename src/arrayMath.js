@@ -1,4 +1,4 @@
-import { sum as _sum, mean, compose, curry } from 'ramda'
+import { sum as _sum, mean, compose, curry, subtract, partial, map, flip } from 'ramda'
 
 /**
  * arr: [1, 2, 3, 4, 5, 6]
@@ -25,3 +25,7 @@ export const average = curry(compose(mean, subArray))
 export const low = curry(compose(min, subArray))
 
 export const high = curry(compose(max, subArray))
+
+export const variance = arr => compose(mean, m => map(compose(partial(flip(Math.pow), [2]), partial(subtract, [m])), arr), mean)(arr)
+
+export const stdp = curry(compose(Math.sqrt, variance, subArray))
