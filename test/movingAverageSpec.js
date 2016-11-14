@@ -1,12 +1,9 @@
 import test from 'ava'
-import { range, compose, nth } from 'ramda'
+import { range } from 'ramda'
 import { sma, ma, ema, rsv, k, d, j, kdj, llv, hhv } from '../src/movingAverage'
 import sh603101 from './sh603101.json'
 
-const LOW = v => v.low
-const HIGH = v => v.high
 const PRICE = v => v.close
-const CLOSE = (data, idx) => compose(PRICE, nth(idx))(data)
 
 test('Simple Moving Avarage', t => {
   const arr = range(1, 20)
@@ -25,20 +22,11 @@ test('Moving Avarage', t => {
   t.deepEqual(fiveDaysMA(arr), expectResults)
 })
 
-test('Moving Avarage with selector', t => {
-  const arr = range(1, 20).map(v => ({ price: v }))
-  const f = v => v.price
-  const fiveDaysMA = ma(5)
-  const expectResults = [null, null, null, null, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
-
-  t.deepEqual(fiveDaysMA(arr, f), expectResults)
-})
-
 test('LLV', t => {
   const arr = range(1, 20).map(v => ({ close: v }))
   const periods = 5
   const startFrom = 10
-  const fiveDaysLLV = llv(periods, PRICE, startFrom)
+  const fiveDaysLLV = llv(PRICE, periods, startFrom)
   const expectResults = 7
 
   t.deepEqual(fiveDaysLLV(arr), expectResults)
@@ -48,7 +36,7 @@ test('HHV', t => {
   const arr = range(1, 20).map(v => ({ close: v }))
   const periods = 5
   const startFrom = 10
-  const fiveDaysHHV = hhv(periods, PRICE, startFrom)
+  const fiveDaysHHV = hhv(PRICE, periods, startFrom)
   const expectResults = 11
 
   t.deepEqual(fiveDaysHHV(arr), expectResults)
@@ -66,13 +54,13 @@ test('Exponential Moving Avarage', t => {
 test('RSV', t => {
   const nineDaysRSV = rsv(9)
   const expectResults = [0, 100, 100, 100, 100, 100, 100, 100, 90.784, 72.871, 63.269, 63.214, 44.560, 42.33, 39.272, 44.253, 30.402, 82.521, 100, 85.25]
-  const returnedResults = nineDaysRSV(CLOSE, LOW, HIGH)(sh603101).map(v => Math.round(1000 * v) / 1000)
+  const returnedResults = nineDaysRSV(sh603101).map(v => Math.round(1000 * v) / 1000)
 
   t.deepEqual(returnedResults, expectResults)
 })
 
 test('K', t => {
-  const nineDaysRSV = rsv(9)(CLOSE, LOW, HIGH)
+  const nineDaysRSV = rsv(9)
   const threeDaysK = k(3)
   const expectResults = [0, 33.333, 55.556, 70.37, 80.247, 86.831, 91.221, 94.147, 93.026, 86.308, 78.628, 73.49, 63.847, 56.675, 50.874, 48.667, 42.578, 55.893, 70.595, 75.48]
   const returnedResults = threeDaysK(nineDaysRSV)(sh603101).map(v => Math.round(1000 * v) / 1000)
@@ -81,7 +69,7 @@ test('K', t => {
 })
 
 test('D', t => {
-  const nineDaysRSV = rsv(9)(CLOSE, LOW, HIGH)
+  const nineDaysRSV = rsv(9)
   const threeDaysK = k(3)
   const kN = threeDaysK(nineDaysRSV)(sh603101)
   const threeDaysD = d(3)
@@ -92,7 +80,7 @@ test('D', t => {
 })
 
 test('D', t => {
-  const nineDaysRSV = rsv(9)(CLOSE, LOW, HIGH)
+  const nineDaysRSV = rsv(9)
   const threeDaysK = k(3)
   const kN = threeDaysK(nineDaysRSV)(sh603101)
   const threeDaysD = d(3)
@@ -104,13 +92,13 @@ test('D', t => {
 })
 
 test('KDJ', t => {
-  const nineDaysRSV = rsv(9)(CLOSE, LOW, HIGH)
+  const nineDaysRSV = rsv(9)
   const threeDaysK = k(3)
   const kN = threeDaysK(nineDaysRSV)(sh603101)
   const threeDaysD = d(3)
   const dN = threeDaysD(kN)
   const jN = j(kN, dN)
-  const kdjN = kdj(9, 3, 3)(CLOSE, LOW, HIGH)(sh603101)
+  const kdjN = kdj(9, 3, 3)(sh603101)
   const expectResults = [kN, dN, jN]
 
   t.deepEqual(kdjN, expectResults)
