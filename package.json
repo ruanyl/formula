@@ -1,12 +1,13 @@
 {
-  "name": "formula",
+  "name": "stock-formula",
   "version": "0.1.0",
   "description": "stock formula",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "./node_modules/.bin/ava --require babel-register  test/*",
     "build": "./node_modules/babel-cli/bin/babel.js src --out-dir lib",
-    "build:watch": "./node_modules/babel-cli/bin/babel.js src --out-dir lib --watch"
+    "build:watch": "./node_modules/babel-cli/bin/babel.js src --out-dir lib --watch",
+    "prepublish": "npm run build"
   },
   "author": "Yulong Ruan<ruanyu1@gmail.com>",
   "license": "MIT",
