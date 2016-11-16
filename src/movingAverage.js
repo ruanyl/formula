@@ -11,7 +11,7 @@ const emaFormula = (n, today, yesterday) => {
 }
 const smaFormula = (n, today, yesterday) => (today + ((n - 1) * yesterday)) / n
 
-const _ma = (n, data) => data.reduce((pv, cv, idx) => (idx < n - 1 ? pv.concat([null]) : pv.concat([average(n, idx, data)])), [])
+const _ma = (n, data) => data.reduce((pv, cv, idx) => (idx < n - 1 ? pv.concat([0]) : pv.concat([average(n, idx, data)])), [])
 const _sma = (n, data) => data.reduce((pv, cv) => (last(pv) === undefined ? pv.concat(cv) : pv.concat(smaFormula(n, cv, last(pv)))), [])
 const _ema = (n, data) => data.reduce((pv, cv) => (last(pv) === undefined ? pv.concat(cv) : pv.concat(emaFormula(n, cv, last(pv)))), [])
 const _llv = (f, n, idx) => compose(partial(low, [n, idx]), partialRight(mapF, [f]))

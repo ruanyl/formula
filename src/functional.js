@@ -20,3 +20,5 @@ export const mapCompose = funcs => {
   )
   return compose(...reverse(mappedFuncs))
 }
+
+export const mix = (a, b, f) => a.map((v, i) => f(v, b[i]))

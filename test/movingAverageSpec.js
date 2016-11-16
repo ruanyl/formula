@@ -17,7 +17,7 @@ test('Simple Moving Avarage', t => {
 test('Moving Avarage', t => {
   const arr = range(1, 20)
   const fiveDaysMA = ma(5)
-  const expectResults = [null, null, null, null, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+  const expectResults = [0, 0, 0, 0, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
 
   t.deepEqual(fiveDaysMA(arr), expectResults)
 })
