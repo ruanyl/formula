@@ -7,7 +7,7 @@ export const tr = data => data.map((s, i) => {
     return HIGH(s) - LOW(s)
   }
   const p = data[i - 1]
-  return Math.max(HIGH(s) - LOW(s), HIGH(s) - CLOSE(p), CLOSE(p) - LOW(s))
+  return Math.max(HIGH(s) - LOW(s), Math.abs(HIGH(s) - CLOSE(p)), Math.abs(CLOSE(p) - LOW(s)))
 })
 
 // Avarage True Range
