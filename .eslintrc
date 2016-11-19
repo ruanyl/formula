@@ -23,6 +23,7 @@
     "semi": ["error", "never"],
     "no-console": 0,
     "no-shadow": 0,
-    "max-len": 0
+    "max-len": 0,
+    "new-cap": 0
   }
 }
