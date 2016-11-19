@@ -1,4 +1,4 @@
-import { T, compose, reverse, last, cond, equals } from 'ramda'
+import { T, compose, reverse, last, cond, equals, transpose } from 'ramda'
 
 /**
  * funcs = [func1, func2, func3]
@@ -21,4 +21,12 @@ export const mapCompose = funcs => {
   return compose(...reverse(mappedFuncs))
 }
 
-export const mix = (a, b, f) => a.map((v, i) => f(v, b[i]))
+export const mix = (f, ...args) => args[0].map((v, i) => f(...args.map(a => a[i])))
+export const mixAll = (fns, ...args) =>
+  transpose(
+    args[0].map(
+      (v, i) => fns.map(
+        fn => fn(...args.map(a => a[i]))
+      )
+    )
+  )
