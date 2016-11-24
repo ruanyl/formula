@@ -1,5 +1,5 @@
 import { subtract, multiply, map } from 'ramda'
-import { ema } from './ema'
+import { emaF as ema } from './ema'
 import { ema as _ema } from './movingAverage'
 import { CLOSE } from './cons'
 import { mix } from './functional'

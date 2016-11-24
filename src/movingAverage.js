@@ -1,7 +1,6 @@
 import { last, compose, partial, partialRight, curry, nth } from 'ramda'
 import { average, low, high } from './arrayMath'
-import { mapCompose } from './functional'
-import { CLOSE, LOW, HIGH } from './cons'
+import { CLOSE } from './cons'
 
 export const mapF = (data = [], f) => (f === undefined ? data : data.map(f))
 
@@ -30,17 +29,3 @@ export const ema = curry(_ema)
 export const llv = curry(_llv)
 export const hhv = curry(_hhv)
 export const close = curry(_close)
-
-export const rsv = n => data => data.map(
-  (record, idx) => {
-    const closePrice = close(idx, data)
-    const highPrice = hhv(HIGH, n, idx)(data)
-    const lowPrice = llv(LOW, n, idx)(data)
-    return highPrice === lowPrice ? 0 : 100 * ((closePrice - lowPrice) / (highPrice - lowPrice))
-  }
-)
-
-export const k = n => rsvN => compose(sma(n), rsvN)
-export const d = n => kN => sma(n, kN)
-export const j = (kN, dN) => kN.map((kv, idx) => (3 * kv) - (2 * nth(idx, dN)))
-export const kdj = (rPeriods, kPeriods, dPeriods) => mapCompose([k(kPeriods)(rsv(rPeriods)), d(dPeriods), j])
