@@ -26,6 +26,11 @@
     "max-len": 0,
     "new-cap": 0,
     "func-names": 0,
-    "arrow-parens": ["error", "as-needed"]
+    "arrow-parens": ["error", "as-needed"],
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "functions": "ignore"
+    }]
   }
 }
