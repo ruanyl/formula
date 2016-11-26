@@ -1,5 +1,5 @@
 {
-  "name": "stock-formula",
+  "name": "technical-indicator",
   "version": "0.1.0",
   "description": "stock formula",
   "main": "lib/index.js",
