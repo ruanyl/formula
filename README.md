@@ -31,6 +31,12 @@ import { adosc } from 'technical-indicator'
 adosc(shortPeriods, longPeriods)(data)
 ```
 
+### Chaikin Money Flow
+```
+import { cmf } from 'technical-indicator'
+cmf(periods)(data)
+```
+
 ### True Range
 ```
 import { tr } from 'technical-indicator'
