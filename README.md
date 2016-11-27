@@ -9,12 +9,6 @@ const data = [
     "high" : 12.69,
     "close" : 12.69,
     "low" : 12.69,
-    "chg" : 0,
-    "percent" : 0,
-    "turnrate" : 0.09,
-    "dif" : 0,
-    "dea" : 0,
-    "time" : "Fri May 06 00:00:00 +0800 2016"
   },
 ]
 ```
