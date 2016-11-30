@@ -1,6 +1,6 @@
 import test from 'ava'
-import { range } from 'ramda'
-import { sum, subArray, max, min, average, low, high, variance, stdp } from '../src/arrayMath'
+import { range, mean } from 'ramda'
+import { sum, subArray, max, min, average, low, high, variance, stdp, meanDeviation, move } from '../src/arrayMath'
 
 test('Sub Array', t => {
   const arr = range(1, 20)
@@ -45,4 +45,14 @@ test('variance ', t => {
 test('standard deviation ', t => {
   const arr = [2, 4, 4, 4, 5, 5, 7, 9]
   t.is(stdp(arr.length, arr.length - 1, arr), 2)
+})
+
+test('Mean Deviation', t => {
+  const arr = [3, 6, 6, 7, 8, 11, 15, 16]
+  t.is(meanDeviation(arr), 3.75)
+})
+
+test('move', t => {
+  const arr = [3, 6, 6, 7, 8, 11, 15, 16]
+  t.deepEqual(move(2, mean)(arr), [0, 4.5, 6, 6.5, 7.5, 9.5, 13, 15.5])
 })

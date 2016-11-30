@@ -30,4 +30,11 @@ export const variance = arr => compose(mean, m => map(compose(partial(flip(Math.
 
 export const stdp = curry(compose(Math.sqrt, variance, subArray))
 
+// e.g., max of previous N days' CLOSE price
 export const prev = (periods, mapping, selector) => data => data.map((d, i) => selector(subArray(periods, i, data).map(mapping)))
+
+export const meanDeviation = arr => mean(arr.map(v => Math.abs(v - mean(arr))))
+
+// data: Array
+// e.g., prev N's mean
+export const move = (n, f) => data => data.map((d, i) => (i < (n - 1) ? 0 : f(subArray(n, i, data))))

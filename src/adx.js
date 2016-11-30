@@ -1,7 +1,7 @@
 import { ema } from './movingAverage'
 import { atr } from './atr'
 import { mix } from './functional'
-import { HIGH, LOW } from './cons'
+import { HIGH, LOW, divideZero } from './cons'
 
 const dmPlus = data => data.map((today, i) => {
   if (i === 0) return 0
@@ -15,8 +15,6 @@ const dmMinus = data => data.map((today, i) => {
   return (LOW(yesterday) - LOW(today)) > (HIGH(today) - HIGH(yesterday)) ? Math.max(LOW(yesterday) - LOW(today), 0) : 0
 })
 
-const _divide = (a, b) => (b === 0 ? 0 : a / b)
-
 // const sumPeriods = (periods, data) => data.map((t, i) => (i < periods ? 0 : sum(periods, i, data)))
 
 /**
@@ -24,7 +22,7 @@ const _divide = (a, b) => (b === 0 ? 0 : a / b)
  */
 export const adx = periods => data => {
   const atrD = ema(periods, atr(periods)(data))
-  const diPlus = ema(periods, mix(_divide, dmPlus(data), atrD)).map(m => 100 * m)
-  const diMinus = ema(periods, mix(_divide, dmMinus(data), atrD)).map(m => 100 * m)
-  return ema(periods, diPlus.map((p, i) => Math.abs(_divide((diPlus[i] - diMinus[i]), (diPlus[i] + diMinus[i]))) * 100))
+  const diPlus = ema(periods, mix(divideZero, dmPlus(data), atrD)).map(m => 100 * m)
+  const diMinus = ema(periods, mix(divideZero, dmMinus(data), atrD)).map(m => 100 * m)
+  return ema(periods, diPlus.map((p, i) => Math.abs(divideZero((diPlus[i] - diMinus[i]), (diPlus[i] + diMinus[i]))) * 100))
 }

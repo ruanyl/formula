@@ -14,7 +14,7 @@ const smaFormula = (n, today, yesterday) => {
 }
 
 // Moving Avarage
-const _ma = (n, data) => data.reduce((pv, cv, idx) => (idx < n - 1 ? pv.concat([0]) : pv.concat([average(n, idx, data)])), [])
+const _ma = (n, data) => data.reduce((pv, cv, idx) => (idx < (n - 1) ? pv.concat([0]) : pv.concat([average(n, idx, data)])), [])
 // Smooth Moving Avarage
 const _sma = (n, data) => data.reduce((pv, cv) => (last(pv) === undefined ? pv.concat(cv) : pv.concat(smaFormula(n, cv, last(pv)))), [])
 // Exponential Moving Avarage
