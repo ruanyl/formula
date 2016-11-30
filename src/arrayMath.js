@@ -29,3 +29,5 @@ export const high = curry(compose(max, subArray))
 export const variance = arr => compose(mean, m => map(compose(partial(flip(Math.pow), [2]), partial(subtract, [m])), arr), mean)(arr)
 
 export const stdp = curry(compose(Math.sqrt, variance, subArray))
+
+export const prev = (periods, mapping, selector) => data => data.map((d, i) => selector(subArray(periods, i, data).map(mapping)))
