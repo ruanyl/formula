@@ -1,6 +1,6 @@
 import test from 'ava'
 import { range } from 'ramda'
-import { sma, ma, ema, llv, hhv } from '../src/movingAverage'
+import { sma, ma, ema, llv, hhv, wma } from '../src/movingAverage'
 
 const PRICE = v => v.close
 
@@ -46,6 +46,15 @@ test('Exponential Moving Avarage', t => {
   const nineDaysEMA = ema(9)
   const expectResults = [22.81, 22.87, 22.87, 22.95, 22.92, 22.95, 22.96, 23.03, 23.10, 23.18, 23.47]
   const returnedResults = nineDaysEMA(arr).map(v => Math.round(100 * v) / 100)
+
+  t.deepEqual(returnedResults, expectResults)
+})
+
+test('Weighted Moving Avarage', t => {
+  const arr = [32.52, 35.19, 48.63, 45.54, 31.17, 41.77, 25.07, -1.67, 25.60, 8.42, 4.07, 10.05, 11.60, 12.80, 9.24, -1.95, 5.30, 15.70]
+  const tenDaysWMA = wma(10)
+  const expectResults = [0, 0, 0, 0, 0, 0, 0, 0, 0, 23.89, 19.32, 16.35, 14.12, 12.78, 11.39, 8.37, 7.45, 8.79]
+  const returnedResults = tenDaysWMA(arr).map(v => Math.round(100 * v) / 100)
 
   t.deepEqual(returnedResults, expectResults)
 })
