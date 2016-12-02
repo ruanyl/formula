@@ -38,3 +38,6 @@ export const meanDeviation = arr => mean(arr.map(v => Math.abs(v - mean(arr))))
 // data: Array
 // e.g., prev N's mean
 export const move = (n, f) => data => data.map((d, i) => (i < (n - 1) ? 0 : f(subArray(n, i, data))))
+
+// e.g., N days agos CLOSE price
+export const ref = (f, periods) => (data, i) => (i - periods < 0 ? 0 : f(data[i - periods]))
