@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "./node_modules/.bin/ava --require babel-register  test/*",
+    "coverage": "./node_modules/.bin/nyc --reporter=json npm test",
     "build": "./node_modules/babel-cli/bin/babel.js src --out-dir lib",
     "build:watch": "./node_modules/babel-cli/bin/babel.js src --out-dir lib --watch",
     "prepublish": "npm run build"
@@ -18,6 +19,7 @@
     "ava": "^0.16.0",
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
-    "babel-preset-es2015": "^6.16.0"
+    "babel-preset-es2015": "^6.16.0",
+    "nyc": "^10.0.0"
   }
 }
