@@ -21,7 +21,7 @@ export const mapCompose = funcs => {
   return compose(...reverse(mappedFuncs))
 }
 
-export const mix = (f, ...args) => args[0].map((v, i) => f(...args.map(a => a[i])))
+export const mix = (f, ...args) => transpose(args).map(arg => f(...arg))
 
 export const mixAll = (fns, ...args) => transpose(
   args[0].map(
