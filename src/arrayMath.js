@@ -1,4 +1,4 @@
-import { sum as _sum, mean, compose, curry, subtract, partial, map, flip } from 'ramda'
+import { sum as _sum, mean, compose, curry, subtract, partial, map, flip, nth } from 'ramda'
 
 /**
  * arr: [1, 2, 3, 4, 5, 6]
@@ -40,4 +40,4 @@ export const meanDeviation = arr => mean(arr.map(v => Math.abs(v - mean(arr))))
 export const move = (n, f) => data => data.map((d, i) => (i < (n - 1) ? 0 : f(subArray(n, i, data))))
 
 // e.g., N days agos CLOSE price
-export const ref = (f, periods) => (data, i) => (i - periods < 0 ? 0 : f(data[i - periods]))
+export const ref = (f, periods) => data => (data.length <= periods ? 0 : f(nth(-(periods + 1), data)))
