@@ -1,4 +1,5 @@
 import { prev, max, min } from '../arrayMath'
+import { Callback, KData } from '../types';
 
 export const prevhl = (f: Callback<KData, number>, shortPeriods: number, longPeriods: number) => (data: KData[]) => ({
   longPeriodsHigh: prev(longPeriods, f, max)(data),

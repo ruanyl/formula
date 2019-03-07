@@ -3,6 +3,7 @@ import { ma } from './movingAverage'
 import { stdp } from './arrayMath'
 import { CLOSE } from './cons'
 import { mix } from './functional'
+import { KData } from './types';
 
 export const mid = (periods: number) => compose(ma(periods), map(CLOSE))
 export const dis = (periods: number) => compose(c => c.map((v, idx) => stdp(periods, idx, c)), map(CLOSE))

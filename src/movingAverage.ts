@@ -2,6 +2,7 @@ import { last, compose, partial, partialRight, curry, nth, range, multiply, sum 
 import { average, low, high, subArray } from './arrayMath'
 import { CLOSE } from './cons'
 import { mix } from './functional'
+import { Callback, KData } from './types';
 
 export const mapF = (data: any[] = [], f: Callback) => (f === undefined ? data : data.map(f))
 

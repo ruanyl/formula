@@ -2,6 +2,7 @@ import { ema } from './movingAverage'
 import { atr } from './atr'
 import { mix } from './functional'
 import { HIGH, LOW, divideZero } from './cons'
+import { KData } from './types';
 
 const dmPlus = (data: KData[]) => data.map((today, i) => {
   if (i === 0) return 0

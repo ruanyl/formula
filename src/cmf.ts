@@ -1,6 +1,7 @@
 /* Chaikin Money Flow */
 import { VOLUME, HIGH, LOW, CLOSE } from './cons'
 import { sum } from './arrayMath'
+import { KData } from './types';
 
 // Money Flow Multiplier
 // [(close - low) - (high - close)] / (high - low)

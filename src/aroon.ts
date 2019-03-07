@@ -2,6 +2,7 @@ import { lastIndexOf, subtract } from 'ramda'
 import { HIGH, LOW } from './cons'
 import { max, min, subArray } from './arrayMath'
 import { mix } from './functional'
+import { KData } from './types';
 
 const aroonUp = (periods: number, data: KData[]) => {
   const high = data.map(HIGH)

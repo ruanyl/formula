@@ -1,3 +1,5 @@
+import { KData } from './types';
+
 export const CLOSE = (s: KData) => s.close
 export const HIGH = (s: KData) => s.high
 export const LOW = (s: KData) => s.low

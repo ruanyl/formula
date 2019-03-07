@@ -3,6 +3,7 @@ import { TYP, divideZero } from './cons'
 import { ma } from './movingAverage'
 import { mix } from './functional'
 import { meanDeviation, move } from './arrayMath'
+import { KData } from './types';
 
 /**
  * Commodity Channel Index

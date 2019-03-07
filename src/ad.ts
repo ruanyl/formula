@@ -2,6 +2,7 @@ import { isNil, last, subtract, compose } from 'ramda'
 import { ema } from './movingAverage'
 import { mix } from './functional'
 import { mfv } from './cmf'
+import { KData } from './types';
 
 /**
  * Accumulation Distribution Line

@@ -1,5 +1,6 @@
 import { range } from 'ramda'
 import { sma, ma, ema, llv, hhv, wma } from '../src/movingAverage'
+import { KData } from '../src/types';
 
 const PRICE = (v: KData) => v.close
 

@@ -2,6 +2,7 @@ import { compose, nth, curry } from 'ramda'
 import { hhv, llv, sma, close } from './movingAverage'
 import { LOW, HIGH } from './cons'
 import { mapMix } from './functional'
+import { KData } from './types';
 
 export const rsv = (n: number) => (data: KData[]) => data.map((record, idx) => {
   const closePrice = close(idx, data)

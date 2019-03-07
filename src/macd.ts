@@ -3,6 +3,7 @@ import { emaF as ema } from './ema'
 import { ema as _ema } from './movingAverage'
 import { CLOSE } from './cons'
 import { mix } from './functional'
+import { KData } from './types';
 
 export const dif = (short: number = 12, long: number = 26) =>
   (data: KData[]) => mix<number, number, number>(subtract, ema(CLOSE, short)(data), ema(CLOSE, long)(data))

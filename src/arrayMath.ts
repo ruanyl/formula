@@ -1,4 +1,5 @@
 import { sum as _sum, mean, compose, curry, subtract, partial, map, flip, nth } from 'ramda'
+import { Callback, KData, PropFunction } from './types';
 
 export const subArray = <T = number>(n: number = 1, idx: number = 0, arr: T[] = []) => {
   const end = idx + 1

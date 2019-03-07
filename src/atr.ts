@@ -1,5 +1,6 @@
 import { ema } from './movingAverage'
 import { CLOSE, HIGH, LOW } from './cons'
+import { KData } from './types';
 
 // True Range
 export const tr = (data: KData[]) => data.map((s, i) => {
